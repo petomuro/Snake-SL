@@ -33,4 +33,4 @@ class NeuralNetwork:
                           str(datetime.now().strftime("%Y%m%d%H%M%S")) + '.h5')
 
     def load_weights_(self):
-        self.network.load_weights('weights/model20210517130546.h5')
+        self.network.load_weights('weights/model20210525141121.h5')
