@@ -1,0 +1,2 @@
+no_of_layers2_no_of_neurons64.0_snake_lr0.01_batch_size224.0_epochs6.0_score6613
+Params: {'no_of_layers': 2.0, 'no_of_neurons': 64.0, 'lr': 0.01, 'batch_size': 224.0, 'epochs': 6.0}
