@@ -1,9 +1,9 @@
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import Sequential, layers, Input
+from datetime import datetime
+from datetime import datetime
+
+from tensorflow.keras import Sequential, Input
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
-from datetime import datetime
 
 
 class NeuralNetwork:

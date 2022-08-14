@@ -1,12 +1,13 @@
 import math as m
-import numpy as np
 import random
 from datetime import datetime
-from gradient_free_optimizers import HillClimbingOptimizer, StochasticHillClimbingOptimizer
 
-from snake_game import SnakeGame
-from neural_network import NeuralNetwork
+import numpy as np
+from gradient_free_optimizers import StochasticHillClimbingOptimizer
+
 from helper import Helper
+from neural_network import NeuralNetwork
+from snake_game import SnakeGame
 
 # Change OPTIMIZATION to True if you want to optimize hyperparams
 OPTIMIZATION = False
@@ -63,7 +64,8 @@ class Optimization:
             f.write('Params: ' + str(param) + '\n')
 
     def train_model(self, training_data, model, batch_size, epochs):
-        model.fit((np.array([i[0] for i in training_data]).reshape(-1, 8)), (np.array([i[1] for i in training_data]).reshape(-1, 4)),
+        model.fit((np.array([i[0] for i in training_data]).reshape(-1, 8)),
+                  (np.array([i[1] for i in training_data]).reshape(-1, 4)),
                   batch_size=batch_size, epochs=epochs)
 
         return model
@@ -211,7 +213,9 @@ class Agent:
         angle, food_direction_vector_normalized, snake_direction_vector_normalized = self.get_angle(
             snake_direction_vector, food_direction_vector, game)
 
-        return np.array([int(check_left), int(check_front), int(check_right), food_direction_vector_normalized[0], snake_direction_vector_normalized[0], food_direction_vector_normalized[1], snake_direction_vector_normalized[1], angle])
+        return np.array([int(check_left), int(check_front), int(check_right), food_direction_vector_normalized[0],
+                         snake_direction_vector_normalized[0], food_direction_vector_normalized[1],
+                         snake_direction_vector_normalized[1], angle])
 
     def get_snake_direction_vector(self, snake, length):
         return np.array(snake[length - 1]) - np.array(snake[length - 2])
@@ -222,7 +226,8 @@ class Agent:
     def is_direction_blocked(self, snake, direction, length, game):
         point = np.array(snake[length - 1]) + np.array(direction)
 
-        return point.tolist() in snake[:-1] or point[0] < 0 or point[1] < 0 or point[0] >= game.DISPLAY_WIDHT or point[1] >= game.DISPLAY_HEIGHT
+        return point.tolist() in snake[:-1] or point[0] < 0 or point[1] < 0 or point[0] >= game.DISPLAY_WIDHT or point[
+            1] >= game.DISPLAY_HEIGHT
 
     def turn_vector_to_the_left(self, vector):
         return np.array([-vector[1], vector[0]])
@@ -241,11 +246,13 @@ class Agent:
             norm_of_snake_direction_vector = game.SNAKE_BLOCK
 
         food_direction_vector_normalized = food_direction_vector / \
-            norm_of_apple_direction_vector
+                                           norm_of_apple_direction_vector
         snake_direction_vector_normalized = snake_direction_vector / \
-            norm_of_snake_direction_vector
-        angle = m.atan2(food_direction_vector_normalized[1] * snake_direction_vector_normalized[0] - food_direction_vector_normalized[0] * snake_direction_vector_normalized[1],
-                        food_direction_vector_normalized[1] * snake_direction_vector_normalized[1] + food_direction_vector_normalized[0] * snake_direction_vector_normalized[0]) / m.pi
+                                            norm_of_snake_direction_vector
+        angle = m.atan2(food_direction_vector_normalized[1] * snake_direction_vector_normalized[0] -
+                        food_direction_vector_normalized[0] * snake_direction_vector_normalized[1],
+                        food_direction_vector_normalized[1] * snake_direction_vector_normalized[1] +
+                        food_direction_vector_normalized[0] * snake_direction_vector_normalized[0]) / m.pi
 
         return angle, food_direction_vector_normalized, snake_direction_vector_normalized
 
